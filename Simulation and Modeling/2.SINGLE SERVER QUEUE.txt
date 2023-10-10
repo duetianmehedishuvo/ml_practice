@@ -1,0 +1,101 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int N,i,j,temp=0,CLOCK=0,DIF=0,I,J;
+    cout<<"Enter Number of Customers:"<<endl;
+    cin>>N;
+    int AT[N]= {0},ST[N]= {0},CAT[N]= {0},NAT,NDT,QL[N]= {0},CDT[N]= {0},IDT[N]= {0};
+    for(i=2; i<=N; i++)
+    {
+        AT[i]=rand()%100+1;
+    }
+    for(i=1; i<=N; i++)
+    {
+        ST[i]=rand()%50+1;
+    }
+    for(i=2; i<=N; i++)
+    {
+        CAT[i]=CAT[i-1]+AT[i];
+    }
+    I=2,J=1;
+    NAT=CAT[2],NDT=CDT[1]=ST[1];
+L1:
+    if(I>N)
+        goto L3;
+    else
+    {
+        DIF=NAT-NDT;
+        if(DIF==0)
+        {
+            QL[I]=QL[I-1];
+            goto L2;
+        }
+        else if(DIF<0)
+        {
+            CLOCK=NAT;
+            NAT=CAT[I+1];
+            QL[I]=I-J;
+            I=I+1;
+            goto L1;
+        }
+        else if(DIF>0)
+        {
+            if(I-J>1)
+                goto L3;
+            else
+            {
+                IDT[I]=DIF;
+                goto L2;
+            }
+        }
+    }
+L2:
+    CLOCK=NAT;
+    NAT=CAT[I+1];
+    CDT[J+1]=CAT[I]+ST[J+1];
+    NDT=CDT[J+1];
+    I=I+1;
+    J=J+1;
+    if(J>=N)
+        goto L4;
+    else
+        goto L1;
+L3:
+    CLOCK=NDT;
+    CDT[J+1]=CDT[J]+ST[J+1];
+    NDT=CDT[J+1];
+    J=J+1;
+    if(J>=N)
+        goto L4;
+    else
+        goto L1;
+L4:
+    cout<<"Cumulative Departure Time: "<<endl;
+    for(i=1; i<=N; i++)
+    {
+        cout<<CDT[i]<<"\t";
+    }
+    cout<<endl;
+    cout<<"Cumulative Arival Time: "<<endl;
+    for(i=1; i<=N; i++)
+    {
+        cout<<CAT[i]<<"\t";
+    }
+    cout<<endl;
+    cout<<"Idle Time: "<<endl;
+    for(i=1; i<=N; i++)
+    {
+        cout<<IDT[i]<<"\t";
+    }
+    cout<<endl;
+    cout<<"Queue Length Array: "<<endl;
+    for(i=1; i<=N; i++)
+    {
+        cout<<QL[i]<<"\t";
+    }
+    cout<<endl<<"Last Departure Time: "<<CDT[N]<<endl;
+    cout<<"CLOCK: "<<CLOCK<<endl;
+    return 0;
+}

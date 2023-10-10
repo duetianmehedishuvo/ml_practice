@@ -1,0 +1,97 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int data;
+    Node *Next;
+    Node()
+    {
+        Next=NULL;
+    }
+};
+Node *head=NULL;
+
+void Insert(int x)
+{
+    Node *temp=new Node;
+    temp->data=x;
+    temp->Next=NULL;
+    if(head==NULL)
+        head=temp;
+    else
+    {
+        Node *temp1=head;
+        while(temp1->Next!=NULL)
+        {
+            temp1=temp1->Next;
+        }
+        temp1->Next=temp;
+    }
+}
+void Delete(int x)
+{
+    if(head==NULL)
+        cout<<"Empty Linked.\n";
+    else if(head->data==x)
+    {
+        head=head->Next;
+    }
+    else if(head!=NULL)
+    {
+        Node *temp=head;
+        Node *temp1=temp;
+        while(temp->data!=x)
+        {
+            temp1=temp;
+            temp=temp->Next;
+        }
+        temp1->Next=temp->Next;
+    }
+}
+void show()
+{
+    if(head==NULL)
+        cout<<"Empty Linked.\n";
+    else
+    {
+        Node *temp=head;
+        while(temp->Next!=NULL)
+        {
+            cout<<temp->data<<"\t";
+            temp=temp->Next;
+        }
+        cout<<temp->data;
+    }
+}
+int main()
+{
+    int a=0;
+    do
+    {
+        cout<<"Enter 1 for Insert.\nEnter 2 for Delete.\n";
+        cin>>a;
+        if(a==1)
+        {
+            srand (time(NULL));
+            Insert(rand()%50+1);
+            cout<<"Data of Linked List:"<<endl;
+            show();
+            cout<<endl;
+        }
+        else if(a==2)
+        {
+            cout<<"Enter your choice data:"<<endl;
+            int x;
+            cin>>x;
+            Delete(x);
+            cout<<"Data of Linked List:"<<endl;
+            show();
+            cout<<endl;
+        }
+        else
+            exit(0);
+    }
+    while(a==1||a==2);
+    return 0;
+}

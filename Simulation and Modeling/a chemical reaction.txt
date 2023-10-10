@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+
+a=100
+b=50
+c=0
+t=0
+k1=0.008
+k2=0.002
+print("Time","\t\t\t","A","\t\t\t","B","\t\t\t","C")
+for i in range(50):
+    print('%.5f' % t,"\t\t",'%.5f' % a,"\t\t",'%.5f' % b,"\t\t",'%.5f' % c)
+    t=t+0.1
+    a_i=a+(k2*c-k1*a*b)*t
+    b_i=b+(k2*c-k1*a*b)*t
+    c_i=c+(2*k1*a*b-2*k2*c)*t
+    
+    a=a_i
+    b=b_i
+    c=c_i
+
+    plt.scatter(t,a,color='red')
+    plt.scatter(t,b,color='green')
+    plt.scatter(t,c,color='black')
+
+plt.scatter(t,a,color='red',label='A vs T ')
+plt.scatter(t,b,color='green',label='B vs T')
+plt.scatter(t,c,color='black',label='C vs T')    
+plt.legend(loc='lower right')
+plt.grid()

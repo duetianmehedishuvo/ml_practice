@@ -1,0 +1,50 @@
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+a=12.4
+b=1.2
+c=1
+d=0.9 
+p=(a-c)/(b+d)
+q=a-(b*p)
+x=[0,q,2.1*q]
+y=[a/b,p,0]
+x1=[c/d,q,2*p]
+y1=[0,p,2*p]
+plt.plot(x,y)
+plt.plot(x1,y1)
+plt.grid()
+
+Q=np.empty(100)
+P=np.empty(100)
+P[0]=1.0
+plt.scatter(0,1,s=1)
+line_x=np.empty(2)
+line_y=np.empty(2)
+
+
+
+for i in range(99):
+    j=0
+    Q[i]=c+d*P[i]
+    P[i+1]=(a-Q[i])/b   
+    plt.scatter(Q[i],P[i+1],s=40)  
+    line_x[j]=Q[i]
+    line_y[j]=P[i]
+    j=j+1
+    plt.scatter(Q[i],P[i],s=40) 
+    line_x[j]=Q[i]
+    line_y[j]=P[i+1]
+    plt.plot(line_x,line_y)
+    
+line_x1=np.empty(2)
+line_y1=np.empty(2)
+for i in range(88):
+    j=0
+    line_x1[j]=Q[i]
+    line_y1[j]=P[i+1]
+    j=j+1
+    line_x1[j]=Q[i+1]
+    line_y1[j]=P[i+1]
+    plt.plot(line_x1,line_y1)
+

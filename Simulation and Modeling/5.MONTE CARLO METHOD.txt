@@ -1,0 +1,56 @@
+import matplotlib.pyplot as plt
+import random
+import numpy as np
+# Define the range and parameters
+a = 0.15
+b = 3
+c = 5
+total_points = 50
+in_area = 0
+# Define the target function
+def f(x):
+    return np.sin(x)
+# Lists to store points inside and outside the area
+points_inside = []
+points_outside = []
+# Perform the Monte Carlo simulation
+for _ in range(total_points):
+    x = random.uniform(a, b)
+    y = random.uniform(0, c)
+    if y <= f(x):
+        in_area += 1
+        points_inside.append((x, y))
+    else:
+        points_outside.append((x, y))
+# Calculate the estimated area
+estimated_area = (in_area / total_points) * ((b - a) * c)
+# Define the number of segments
+num_segments = 30
+segment_faults = [0] * num_segments
+# Divide the x-axis into segments and count faults for each segment
+segment_width = (b - a) / num_segments
+for i in range(num_segments):
+    segment_start = a + i * segment_width
+    segment_end = segment_start + segment_width
+    for x, y in points_inside:
+        if segment_start <= x <= segment_end:
+            segment_faults[i] += 1
+# Print the number of faults for each segment
+print("Day     faults")
+for i, faults in enumerate(segment_faults):
+    print(f" {i+1}        {faults}")
+print("Total points: ", total_points)
+print("Number of points inside the area: ", in_area)
+print("Estimated area under the curve: ", estimated_area)
+# Plot the curve and points
+x = np.linspace(a, b, 1000)
+plt.plot(x, f(x), label='f(x)')
+plt.scatter(*zip(*points_inside), color='blue', marker='.', label='Points Inside')
+plt.scatter(*zip(*points_outside), color='red', marker='.', label='Points Outside')
+plt.title('Monte Carlo Estimation')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.axhline(color='black')
+plt.axvline(color='black')
+plt.legend()
+plt.show()

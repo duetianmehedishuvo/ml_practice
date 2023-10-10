@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int i=0,j=0,n,R,E,L,S,U;
+    cout<<"Enter Total Number of values:"<<endl;
+    cin>>n;
+    cout<<"Enter Number of Rows:"<<endl;
+    cin>>R;
+    cout<<"Enter Number of Expected values for each Row:"<<endl;
+    cin>>E;
+    cout<<"Enter Lower Step:"<<endl;
+    cin>>L;
+    cout<<"Enter Step Size:"<<endl;
+    cin>>S;
+    U=L+S;
+    float Chi_Square=0.0;
+    float Expect[R],X[n],Observe[R]= {0};
+    for(i=0; i<n; i++)
+    {
+        X[i]=rand()%n+1;
+    }
+    for(i=0; i<R; i++)
+    {
+        Expect[i]=E;
+    }
+    for(i=0; i<R; i++)
+    {
+        for(j=0; j<n; j++)
+        {
+            if(X[j]>=L && X[j]<=U)
+                Observe[i]++;
+        }
+        L=U+1;
+        U=L+S-1;
+    }
+    for(i=0; i<R; i++)
+    {
+        Chi_Square=Chi_Square+(((Observe[i]-Expect[i])*(Observe[i]-Expect[i]))/Expect[i]);
+    }
+    cout<<"The value of Chi-Square test: "<<Chi_Square<<endl;
+}

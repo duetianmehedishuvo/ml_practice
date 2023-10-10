@@ -1,0 +1,43 @@
+import math
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+vf=20
+xf=0
+yf=50
+i=1
+j=1
+time=0
+xb=[80,90,99,108,116,125,133,141,151,160,196,179,180]
+yb=[0,-2,-5,-9,-15,-18,-23,-29,-28,-25,-21,-20,-17]
+list=[0]
+list1=[50]
+list2=[]
+list3=[]
+flag=0
+while flag<=13:
+  dis=math.sqrt((xf-xb[time])**2+(yf-yb[time])**2)
+  print(dis)
+  if dis<=10:
+    print("Bomber plan shotdown",time)
+  elif time>11:
+     print("Bomber plan escape",time)
+  else:
+     xf=xf+vf*(xb[time]-xf)/dis
+     list.insert(time+1,xf)
+     print(list)
+     yf=yf+vf*(yb[time]-yf)/dis
+     list1.insert(time+1,yf)
+     print(list1)
+     list2.insert(time,xb[time])
+     list3.insert(time,yb[time])
+     time+=1
+  flag=flag+1
+df=pd.DataFrame(zip(list,list1),columns=['time','time1'])
+df1=pd.DataFrame(zip(list2,list3),columns=['time2','time3'])
+plt.grid()
+plt.plot(df['time'],df['time1'], label='Fighter')
+plt.xlabel("Time & Time2")
+plt.ylabel("Time1 & Time3")
+plt.plot(df1['time2'],df1['time3'],label='Bomber')
+plt.legend(loc='best')

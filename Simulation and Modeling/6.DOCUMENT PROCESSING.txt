@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int i,N,WT[50],ST=0,FT=0,CT=0;//WT-Work Time,N-Number of Documents,ST-Start Time,FT-Finish Time,CT-Cumulative Time
+    char F='N';//F-Flag
+    cout<<"Enter Number of Documents: "<<endl;
+    cin>>N;
+    cout<<endl<<"Enter Work Time for each documents:"<<endl;
+    for(i=0; i<N; i++)
+        cin>>WT[i];//45 16 5 29 33 25 21
+    cout<<"JOB_NO \t START_TIME \t WORK_TIME \t FINISH_TIME \t CUMULATIVE_TIME \t FLAG \t PENDING_JOBS "<<endl;
+    for(i=0; i<N; i++)
+    {
+        FT+= WT[i];
+        CT += WT[i];
+        if (CT>60)
+        {
+            F='Y';
+        }
+        else
+        {
+            F='N';
+        }
+        cout<<i+1<<" \t "<<ST<<" \t\t "<<WT[i]<<" \t\t "<<FT<<" \t\t "<<CT<<" \t\t\t "<<F<<" \t\t "<<N-i-1<<endl;
+        ST=FT;
+        if(CT>60)
+        {
+            CT=0;
+            ST+=5;
+            FT+=5;
+        }
+    }
+    return 0;
+}

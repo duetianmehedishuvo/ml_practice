@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    float a=100,b=50,c=0,d=0.1,t=0,k1=0.008,k2=0.002,a_i=0,b_i=0,c_i=0;
+    cout<<"TIME\t\t\tA\t\t\tB\t\t\tC"<<endl;
+    for(int i=0;i<11;i++)
+    {
+        cout<<t<<"\t\t\t"<<a<<"\t\t\t"<<b<<"\t\t\t"<<c<<endl;
+        t=t+0.1;
+        a_i=a+(k2*c-k1*a*b)*d;
+        b_i=b+(k2*c-k1*a*b)*d;
+        c_i=c+(2*k1*a*b-2*k2*c)*d;
+        a=a_i;
+        b=b_i;
+        c=c_i;
+    }
+    return 0;
+}

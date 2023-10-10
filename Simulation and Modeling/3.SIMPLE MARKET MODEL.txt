@@ -1,0 +1,18 @@
+import matplotlib.pyplot as plt
+a=600
+b=3000
+c=-100
+d=2000
+price=(a-c)/(b+d)
+def Q(prices):
+  return[a-b*p for p in prices]
+def S(prices):
+  return[c+d*p for p in prices]
+x=[x for x in range(-5,6)]
+plt.scatter([price],[S([price])],color='green')
+plt.plot(x,Q(x))
+plt.plot(x,S(x))
+plt.xlim(-6,6)
+plt.xlabel('Price')
+plt.ylabel('Quantity\n(Demand/Supply)')
+plt.show()

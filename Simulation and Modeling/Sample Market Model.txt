@@ -1,0 +1,34 @@
+import random
+import matplotlib.pyplot as plt
+test=1
+for i in range(1,100,1): 
+    a=random.randrange(1,1000)
+    b=random.randrange(1,1000)
+    c=random.randrange(1,1000)
+    d=random.randrange(1,1000)
+    
+    p=(a-c)/(b+d)
+    q=a-(b*p)
+    s=c+d*p   
+    if(q==s):
+        print("Equilibrium Point is:",p)
+        print("Q S=",q)
+        test=0
+        break
+    if(test==1):
+        print("There are no Equilibrium Point")
+        
+        
+x=[0,2*q]
+y=[0,2*p]
+x1=[0,2*q]
+y1=[0.5,2*p-0.5]
+
+plt.plot(x,y,color='red',label='price')
+plt.plot(x1,y1,color='green',label='Quantiy')
+plt.legend()
+plt.grid()
+
+
+    
+

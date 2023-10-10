@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int seed,i=0;
+    cout<<"Enter four digit seed:"<<endl;
+    cin>>seed;
+    cout<<"Random Numbers:"<<endl;
+    while(seed!=0)
+    {
+       int next_seed=((seed*seed)/100)%10000;
+       cout<<++i<<" : "<<next_seed<<endl;
+       seed=next_seed;
+    }
+}

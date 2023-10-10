@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int i=0,j=0,n=0,D3=0;
+    cout<<"Enter Number of Values:"<<endl;
+    cin>>n;
+    float ar1[n],ar2[n],D=0,D1=0,D2=0;
+    cout<<"Enter Data:"<<endl;
+    for(i=0;i<n;i++)
+    {
+        cin>>ar1[i];
+        ar2[i]=i+1;
+    }
+    cout<<"Enter the Value of Alpha:"<<endl;
+    cin>>D;
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-1;j++)
+        {
+            if(ar1[i]>ar1[j+1])
+            {
+                swap(ar1[j],ar1[j+1]);
+            }
+        }
+    }
+    for(i=0;i<n;i++)
+    {
+        float x=((ar2[i]/n)-ar1[i]);
+        if(D1<x)
+            D1=x;
+    }
+    for(i=0;i<n;i++)
+    {
+        float x=(ar1[i]-(ar2[i]-1/n));
+        if(D2<x)
+            D2=x;
+    }
+    if(D1<D2)
+        D3=D2;
+    else
+        D3=D1;
+    if(D>D3)
+        cout<<"Accept"<<endl;
+    else
+        cout<<"Reject"<<endl;
+    return 0;
+}

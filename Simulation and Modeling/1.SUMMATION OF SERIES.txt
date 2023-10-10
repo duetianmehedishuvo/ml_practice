@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int N,i,j;
+    float Result=0;
+    cout<<"Enter the value of N:\n";
+    cin>>N;
+    j=2;
+    for(i=2;i<=N;i=i+2)
+    {
+        Result = Result + (pow(i, j)/pow(i, j+1));
+        j++;
+    }
+    cout<<"Result="<<Result;
+    return 0;
+}
